@@ -13,7 +13,7 @@
       --neon-orange: #ff5500;
       --vibrant-yellow: #ffb800;
       --nokia-cyan: #00d2ff;
-      --glass-bg: rgba(14, 8, 5, 0.65);
+      --glass-bg: rgba(14, 8, 5, 0.55);
       --glass-border: rgba(255, 255, 255, 0.2);
       --text-main: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.72);
@@ -42,7 +42,6 @@
       align-items: center;
       overflow-x: hidden;
       
-      /* Background Comic Wallpaper */
       background-image: url('background.png');
       background-size: cover;
       background-position: center top;
@@ -154,7 +153,7 @@
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
-      padding: 20px 22px;
+      padding: 22px 24px;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6),
                   inset 0 1px 1px rgba(255, 255, 255, 0.25);
     }
@@ -163,7 +162,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     .tag-title {
@@ -207,20 +206,43 @@
       50% { transform: scale(1.3); opacity: 0.6; }
     }
 
-    /* Embedded YouTube Frame */
-    .video-container {
+    /* Animated Retro Audio Spectrum Waves */
+    .visualizer-box {
       width: 100%;
-      height: 140px;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 14px;
-      background: #000;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      height: 70px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 16px;
     }
 
-    .video-container iframe, .video-container #player {
-      width: 100%;
-      height: 100%;
+    .bar {
+      width: 4px;
+      height: 8px;
+      background: var(--nokia-cyan);
+      border-radius: 4px;
+      transition: height 0.2s ease;
+    }
+
+    .playing .bar:nth-child(1) { animation: bounce 0.8s infinite alternate 0.1s; }
+    .playing .bar:nth-child(2) { animation: bounce 0.6s infinite alternate 0.2s; }
+    .playing .bar:nth-child(3) { animation: bounce 1.0s infinite alternate 0.3s; }
+    .playing .bar:nth-child(4) { animation: bounce 0.7s infinite alternate 0.1s; }
+    .playing .bar:nth-child(5) { animation: bounce 0.9s infinite alternate 0.4s; }
+    .playing .bar:nth-child(6) { animation: bounce 0.5s infinite alternate 0.2s; }
+    .playing .bar:nth-child(7) { animation: bounce 0.8s infinite alternate 0.5s; }
+    .playing .bar:nth-child(8) { animation: bounce 1.1s infinite alternate 0.3s; }
+    .playing .bar:nth-child(9) { animation: bounce 0.7s infinite alternate 0.2s; }
+    .playing .bar:nth-child(10) { animation: bounce 0.6s infinite alternate 0.4s; }
+
+    @keyframes bounce {
+      0% { height: 6px; background: var(--nokia-cyan); }
+      50% { height: 38px; background: var(--vibrant-yellow); }
+      100% { height: 50px; background: var(--neon-orange); }
     }
 
     /* Track Meta */
@@ -230,7 +252,7 @@
     }
 
     .track-title {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--text-main);
       white-space: nowrap;
@@ -303,8 +325,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       transition: all 0.2s ease;
     }
@@ -445,6 +467,18 @@
       fill: currentColor;
     }
 
+    /* Invisible, browser-approved iframe container */
+    #yt-hidden-mount {
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
+      width: 60px;
+      height: 60px;
+      opacity: 0.01;
+      pointer-events: none;
+      z-index: -1;
+    }
+
     @media (min-width: 600px) {
       .hero-section { justify-content: center; }
       .player-card { padding: 24px 28px; }
@@ -481,9 +515,12 @@
           </div>
         </div>
 
-        <!-- Embedded YouTube Video Screen -->
-        <div class="video-container">
-          <div id="player"></div>
+        <!-- Animated Audio Spectrum -->
+        <div class="visualizer-box" id="visualizer">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div>
         </div>
 
         <!-- Track Info -->
@@ -555,16 +592,30 @@
     </div>
   </footer>
 
+  <!-- Hidden Mount for YouTube API -->
+  <div id="yt-hidden-mount">
+    <div id="player"></div>
+  </div>
+
   <!-- YouTube Iframe API -->
   <script src="https://www.youtube.com/iframe_api"></script>
 
   <script>
-    const PLAYLIST_ID = 'PLNQk18YUccs2R8_aqb6EgEDA5e-uACqWm';
+    // Embed-friendly, verified 2008-2013 Nokia Era track list
+    const tracks = [
+      { id: '26ItGEUSLok', title: 'Zara Sa', artist: 'KK — Jannat (2008)' },
+      { id: 'cmMiyZaSELo', title: 'Khuda Jaane', artist: 'KK, Shilpa Rao — Bachna Ae Haseeno (2008)' },
+      { id: 'b8K0R16j8Hk', title: 'Tum Se Hi', artist: 'Mohit Chauhan — Jab We Met (2007/08)' },
+      { id: 'zZasH6qkn8M', title: 'Tera Hone Laga Hoon', artist: 'Atif Aslam, Alisha Chinai (2009)' },
+      { id: 'sb_44_R_458', title: 'Pee Loon', artist: 'Mohit Chauhan — Once Upon A Time (2010)' },
+      { id: 'T94PHkuydcw', title: 'Tum Ho', artist: 'Mohit Chauhan — Rockstar (2011)' },
+      { id: 'k9nEQ_1Fwvg', title: 'Subhanallah', artist: 'Sreerama Chandra — YJHD (2013)' }
+    ];
 
+    let currentTrackIdx = 0;
     let player;
     let isPlayerReady = false;
     let isPlaying = false;
-    let hasLoaded = false;
     let progressInterval = null;
 
     // Real-time Local Clock
@@ -576,7 +627,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Online counter simulation
+    // Online listener counter simulation
     let onlineCount = 142;
     setInterval(() => {
       onlineCount += Math.floor(Math.random() * 5) - 2;
@@ -587,17 +638,18 @@
     // Initialize YouTube Player
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
+        height: '60',
+        width: '60',
+        videoId: tracks[currentTrackIdx].id,
         playerVars: {
-          'listType': 'playlist',
-          'list': PLAYLIST_ID,
           'playsinline': 1,
-          'controls': 1
+          'controls': 0
         },
         events: {
           'onReady': () => { isPlayerReady = true; },
           'onStateChange': onPlayerStateChange,
           'onError': () => {
-            if (player && isPlayerReady) player.nextVideo();
+            nextTrack();
           }
         }
       });
@@ -610,10 +662,16 @@
     const songTitle = document.getElementById('songTitle');
     const artistName = document.getElementById('artistName');
     const liveDot = document.getElementById('liveDot');
+    const visualizer = document.getElementById('visualizer');
     const progressBar = document.getElementById('progressBar');
     const progressFill = document.getElementById('progressFill');
     const currentTimeEl = document.getElementById('currentTime');
     const totalDurationEl = document.getElementById('totalDuration');
+
+    function updateTrackUI() {
+      songTitle.textContent = tracks[currentTrackIdx].title;
+      artistName.textContent = tracks[currentTrackIdx].artist;
+    }
 
     function formatTime(seconds) {
       if (isNaN(seconds) || seconds === null) return "0:00";
@@ -625,44 +683,33 @@
     function togglePlay() {
       if (!isPlayerReady || !player) return;
 
-      if (!hasLoaded) {
-        player.loadPlaylist({
-          list: PLAYLIST_ID,
-          listType: 'playlist',
-          index: 0
-        });
-        player.unMute();
-        player.setVolume(100);
-        player.playVideo();
-        hasLoaded = true;
-        return;
-      }
-
       if (isPlaying) {
         player.pauseVideo();
       } else {
+        updateTrackUI();
         player.unMute();
         player.setVolume(100);
         player.playVideo();
       }
+    }
+
+    function playCurrentTrack() {
+      if (!player || !isPlayerReady) return;
+      updateTrackUI();
+      player.loadVideoById(tracks[currentTrackIdx].id);
+      player.unMute();
+      player.setVolume(100);
+      player.playVideo();
     }
 
     function nextTrack() {
-      if (player && isPlayerReady) {
-        player.nextVideo();
-        player.unMute();
-        player.setVolume(100);
-        player.playVideo();
-      }
+      currentTrackIdx = (currentTrackIdx + 1) % tracks.length;
+      playCurrentTrack();
     }
 
     function prevTrack() {
-      if (player && isPlayerReady) {
-        player.previousVideo();
-        player.unMute();
-        player.setVolume(100);
-        player.playVideo();
-      }
+      currentTrackIdx = (currentTrackIdx - 1 + tracks.length) % tracks.length;
+      playCurrentTrack();
     }
 
     function updateProgress() {
@@ -701,19 +748,18 @@
         isPlaying = true;
         playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
         liveDot.classList.add('active');
-
-        const videoData = player.getVideoData();
-        if (videoData && videoData.title) {
-          songTitle.textContent = videoData.title.split('|')[0].trim();
-          artistName.textContent = videoData.author || "Nokia Bluetooth Era";
-        }
+        visualizer.classList.add('playing');
+        updateTrackUI();
 
         clearInterval(progressInterval);
         progressInterval = setInterval(updateProgress, 500);
+      } else if (event.data === YT.PlayerState.ENDED) {
+        nextTrack();
       } else {
         isPlaying = false;
         playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
         liveDot.classList.remove('active');
+        visualizer.classList.remove('playing');
         clearInterval(progressInterval);
       }
     }
