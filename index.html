@@ -6,7 +6,7 @@
   <title>Nokia Bluetooth Era — 2008-2013 Radio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Rozha+One&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Rozha+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -14,7 +14,6 @@
       --vibrant-yellow: #ffb800;
       --nokia-cyan: #00d2ff;
       --nokia-red: #d32323;
-      --phone-body: #1c1c1e;
       --lcd-bg: #09131a;
       --text-main: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.72);
@@ -42,8 +41,6 @@
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
-      
-      /* Comic Wallpaper */
       background-image: url('background.png');
       background-size: cover;
       background-position: center top;
@@ -54,9 +51,7 @@
     /* TOP STATUS BAR */
     .top-nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -70,9 +65,6 @@
     }
 
     .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 6px;
       font-family: 'Space Mono', monospace;
       color: var(--nokia-cyan);
       font-weight: 700;
@@ -119,12 +111,6 @@
       align-items: center;
       gap: 6px;
       text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .nav-btn:hover {
-      background: var(--neon-orange);
-      border-color: var(--neon-orange);
     }
 
     .nav-btn svg {
@@ -133,7 +119,7 @@
       fill: currentColor;
     }
 
-    /* MAIN HERO VIEWPORT */
+    /* MAIN HERO */
     .hero-section {
       width: 100%;
       min-height: 100vh;
@@ -146,7 +132,6 @@
       position: relative;
     }
 
-    /* NOKIA PHONE CONTAINER */
     .phone-wrapper {
       position: relative;
       z-index: 2;
@@ -155,7 +140,7 @@
       margin-bottom: 15px;
     }
 
-    /* Dangling Earphone Wire SVG */
+    /* Dangling Earphone */
     .earphone-cable {
       position: absolute;
       top: -38px;
@@ -175,7 +160,6 @@
       position: relative;
     }
 
-    /* Nokia Top Speaker Slit & Jack */
     .phone-top-bar {
       display: flex;
       align-items: center;
@@ -196,7 +180,6 @@
       height: 4px;
       background: #090a0c;
       border-radius: 4px;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
     }
 
     .nokia-logo-top {
@@ -207,7 +190,7 @@
       color: #7d8494;
     }
 
-    /* Middle Section with Red Music Strips */
+    /* Screen Housing */
     .screen-housing {
       display: flex;
       align-items: stretch;
@@ -215,10 +198,9 @@
       margin-bottom: 12px;
     }
 
-    /* Red XpressMusic Side Strip Controls */
     .side-strip {
       background: linear-gradient(180deg, #e52d27 0%, #b31217 100%);
-      width: 26px;
+      width: 28px;
       border-radius: 8px;
       display: flex;
       flex-direction: column;
@@ -236,25 +218,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       font-weight: 800;
-      height: 28px;
+      height: 32px;
       width: 100%;
-      transition: transform 0.1s;
     }
 
     .side-btn:active {
-      transform: scale(0.85);
+      transform: scale(0.88);
     }
 
-    /* Nokia Symbian Screen */
     .phone-screen {
       flex: 1;
       background: var(--lcd-bg);
       border: 2px solid #000;
       border-radius: 12px;
       padding: 8px 10px;
-      box-shadow: inset 0 0 15px rgba(0, 210, 255, 0.15);
       position: relative;
       overflow: hidden;
       font-family: 'Space Mono', monospace;
@@ -272,15 +251,8 @@
     }
 
     .bt-icon {
-      display: inline-block;
       font-weight: 800;
       color: var(--nokia-cyan);
-      animation: pulse-bt 2s infinite;
-    }
-
-    @keyframes pulse-bt {
-      0%, 100% { opacity: 1; text-shadow: 0 0 6px var(--nokia-cyan); }
-      50% { opacity: 0.4; }
     }
 
     .track-details {
@@ -295,7 +267,6 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.2;
     }
 
     .track-artist {
@@ -307,14 +278,13 @@
       text-overflow: ellipsis;
     }
 
-    /* LCD Seek Bar */
     .progress-section {
       margin-bottom: 6px;
     }
 
     .progress-bar-container {
       width: 100%;
-      height: 5px;
+      height: 6px;
       background: rgba(0, 210, 255, 0.18);
       border-radius: 4px;
       cursor: pointer;
@@ -324,13 +294,10 @@
 
     .progress-fill {
       position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
+      left: 0; top: 0; bottom: 0;
       width: 0%;
       background: var(--nokia-cyan);
       box-shadow: 0 0 8px var(--nokia-cyan);
-      transition: width 0.15s linear;
     }
 
     .time-stamps {
@@ -341,13 +308,12 @@
       margin-top: 3px;
     }
 
-    /* KEYPAD & D-PAD CONTROLS */
+    /* Keypad Area */
     .keypad-area {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      padding: 0 4px;
     }
 
     .dpad-row {
@@ -364,11 +330,10 @@
       background: #2b2d35;
       border: 1px solid #434753;
       border-radius: 4px;
-      cursor: pointer;
     }
 
     .dpad-center-btn {
-      width: 52px;
+      width: 54px;
       height: 40px;
       background: radial-gradient(circle, #3a3d47 0%, #1c1d22 100%);
       border: 2px solid #5a5f6e;
@@ -378,7 +343,6 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
 
     .dpad-center-btn svg {
@@ -387,11 +351,6 @@
       fill: var(--vibrant-yellow);
     }
 
-    .dpad-center-btn:active {
-      transform: scale(0.92);
-    }
-
-    /* Mini Keypad grid aesthetic */
     .keypad-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -413,7 +372,6 @@
       font-family: 'Space Mono', monospace;
     }
 
-    /* Scroll Down Indicator */
     .scroll-hint {
       display: flex;
       flex-direction: column;
@@ -425,110 +383,19 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       text-decoration: none;
-      animation: float 2s infinite ease-in-out;
       margin-top: 5px;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-
-    /* SLIDE-OUT PLAYLIST DRAWER */
-    .playlist-drawer {
-      position: fixed;
-      top: 0;
-      right: -320px;
-      width: 300px;
-      height: 100%;
-      background: rgba(18, 10, 6, 0.95);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border-left: 1px solid rgba(255,255,255,0.15);
-      z-index: 200;
-      padding: 24px 20px;
-      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .playlist-drawer.open {
-      right: 0;
-    }
-
-    .drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .drawer-header h3 {
-      font-family: 'Rozha One', serif;
-      color: var(--vibrant-yellow);
-      font-size: 1.3rem;
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      color: var(--text-main);
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    .playlist-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
-    }
-
-    .playlist-item {
-      padding: 12px 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-    }
-
-    .playlist-item:hover, .playlist-item.active {
-      background: rgba(255, 85, 0, 0.25);
-      border-color: var(--neon-orange);
-    }
-
-    .playlist-item h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .playlist-item p {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .drawer-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 150;
-      opacity: 0;
+    /* IN-SCREEN YOUTUBE CONTAINER (Fixes browser autoplay and background killing) */
+    .yt-embedded-box {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0.001; /* Must stay slightly rendered in DOM viewport */
       pointer-events: none;
-      transition: opacity 0.3s;
+      z-index: 1;
     }
 
-    .drawer-overlay.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* NOSTALGIC FOOTER SECTION */
+    /* FOOTER */
     .footer-section {
       width: 100%;
       background: var(--card-footer-bg);
@@ -544,14 +411,9 @@
       z-index: 10;
     }
 
-    .footer-content {
-      max-width: 620px;
-    }
-
+    .footer-content { max-width: 620px; }
     .footer-badge {
       display: inline-flex;
-      align-items: center;
-      gap: 6px;
       background: rgba(0, 210, 255, 0.12);
       border: 1px solid rgba(0, 210, 255, 0.35);
       color: var(--nokia-cyan);
@@ -588,10 +450,7 @@
       text-align: left;
     }
 
-    .disclaimer-box a {
-      color: var(--neon-orange);
-      text-decoration: underline;
-    }
+    .disclaimer-box a { color: var(--neon-orange); }
 
     .footer-bottom {
       display: flex;
@@ -602,47 +461,12 @@
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.75rem;
       color: var(--text-muted);
-      width: 100%;
-    }
-
-    .footer-icon-link {
-      color: #ff3333;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .footer-icon-link svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-
-    /* Offscreen hidden player */
-    #yt-player-container {
-      position: fixed;
-      left: -9999px;
-      bottom: 0;
-      width: 200px;
-      height: 200px;
-      pointer-events: none;
-    }
-
-    @media (min-width: 600px) {
-      .hero-section {
-        justify-content: center;
-      }
-      .phone-wrapper {
-        max-width: 340px;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOP STATUS BAR -->
+  <!-- TOP NAV -->
   <nav class="top-nav">
     <div class="nav-left" id="liveClock">--:-- --</div>
     <div class="nav-center">
@@ -653,73 +477,53 @@
       <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="nav-btn" aria-label="YouTube">
         <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       </a>
-      <button class="nav-btn" id="playlistToggleBtn">
-        ☰ Playlists
-      </button>
     </div>
   </nav>
 
-  <!-- PLAYLIST SLIDE-OUT DRAWER -->
-  <div class="drawer-overlay" id="drawerOverlay"></div>
-  <aside class="playlist-drawer" id="playlistDrawer">
-    <div class="drawer-header">
-      <h3>Tape Vault</h3>
-      <button class="close-btn" id="closeDrawerBtn">×</button>
-    </div>
-    <div class="playlist-list" id="playlistItems"></div>
-  </aside>
-
-  <!-- MAIN HERO / NOKIA PHONE -->
+  <!-- MAIN NOKIA PLAYER -->
   <main class="hero-section">
     <div class="phone-wrapper">
       
-      <!-- Dangling Earphone Wire SVG -->
+      <!-- Hanging Earphone -->
       <svg class="earphone-cable" viewBox="0 0 110 180" fill="none">
-        <!-- White Rubber Cord -->
         <path d="M12 40 C 5 70, -15 110, 18 140 C 35 155, 45 170, 52 180" stroke="#f0f0f0" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- 3.5mm Plug into phone port -->
         <rect x="9" y="30" width="6" height="12" rx="2" fill="#d1d5db"/>
-        <rect x="10.5" y="40" width="3" height="6" fill="#374151"/>
-        <!-- Hanging Earbud -->
         <circle cx="53" cy="180" r="5" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5"/>
-        <rect x="51" y="174" width="4" height="4" rx="1" fill="#4b5563"/>
       </svg>
 
-      <!-- NOKIA PHONE BODY -->
       <div class="phone-chassis">
-        
-        <!-- Top Earpiece & Nokia Brand -->
         <div class="phone-top-bar">
           <div class="jack-port"></div>
           <div class="speaker-slit"></div>
           <span class="nokia-logo-top">NOKIA</span>
         </div>
 
-        <!-- Middle Section: Red Music Bezel + LCD Screen -->
         <div class="screen-housing">
-          <!-- XpressMusic Red Dedicated Playback Strip -->
+          <!-- Physical XpressMusic Side Buttons -->
           <div class="side-strip">
-            <button class="side-btn" id="prevBtn" title="Previous Track">|◀</button>
+            <button class="side-btn" id="prevBtn" title="Prev">|◀</button>
             <button class="side-btn" id="playBtn" title="Play/Pause">▶</button>
-            <button class="side-btn" id="nextBtn" title="Next Track">▶|</button>
+            <button class="side-btn" id="nextBtn" title="Next">▶|</button>
           </div>
 
-          <!-- LCD Display -->
+          <!-- LCD Screen -->
           <div class="phone-screen">
-            <!-- Retro LCD Status Bar -->
+            <!-- Active DOM Iframe Mount Point -->
+            <div class="yt-embedded-box">
+              <div id="player"></div>
+            </div>
+
             <div class="lcd-status">
               <span>📶 3G</span>
-              <span class="bt-icon" title="Bluetooth Active">ᛒ BT</span>
+              <span class="bt-icon">ᛒ BT</span>
               <span>🔋 100%</span>
             </div>
 
-            <!-- Track Info -->
             <div class="track-details">
-              <div class="track-title" id="songTitle">Nokia Player</div>
-              <div class="track-artist" id="artistName">Bluetooth Audio Stream</div>
+              <div class="track-title" id="songTitle">Nokia Bluetooth Player</div>
+              <div class="track-artist" id="artistName">Tap ▶ to Play</div>
             </div>
 
-            <!-- Progress Seek Bar -->
             <div class="progress-section">
               <div class="progress-bar-container" id="progressBar">
                 <div class="progress-fill" id="progressFill"></div>
@@ -732,56 +536,42 @@
           </div>
         </div>
 
-        <!-- Keypad Area: D-Pad & Classic Key Buttons -->
+        <!-- D-Pad -->
         <div class="keypad-area">
           <div class="dpad-row">
             <div class="soft-key"></div>
-            <!-- D-Pad Center Key -->
-            <button class="dpad-center-btn" id="dpadPlayBtn" aria-label="Center Play">
+            <button class="dpad-center-btn" id="dpadPlayBtn">
               <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
             <div class="soft-key"></div>
           </div>
 
-          <!-- Decorative Nokia 3x4 Keypad Grid -->
           <div class="keypad-grid">
-            <div class="key-btn">1</div>
-            <div class="key-btn">2 abc</div>
-            <div class="key-btn">3 def</div>
-            <div class="key-btn">4 ghi</div>
-            <div class="key-btn">5 jkl</div>
-            <div class="key-btn">6 mno</div>
-            <div class="key-btn">7 pqrs</div>
-            <div class="key-btn">8 tuv</div>
-            <div class="key-btn">9 wxyz</div>
-            <div class="key-btn">* +</div>
-            <div class="key-btn">0 ␣</div>
-            <div class="key-btn"># ⇧</div>
+            <div class="key-btn">1</div><div class="key-btn">2 abc</div><div class="key-btn">3 def</div>
+            <div class="key-btn">4 ghi</div><div class="key-btn">5 jkl</div><div class="key-btn">6 mno</div>
+            <div class="key-btn">7 pqrs</div><div class="key-btn">8 tuv</div><div class="key-btn">9 wxyz</div>
+            <div class="key-btn">* +</div><div class="key-btn">0 ␣</div><div class="key-btn"># ⇧</div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
     <a href="#footer" class="scroll-hint">
-      <span>Scroll Down for Story</span>
+      <span>Scroll for Story</span>
       <span>↓</span>
     </a>
   </main>
 
-  <!-- NOSTALGIC FOOTER SECTION -->
+  <!-- NOSTALGIC FOOTER -->
   <footer class="footer-section" id="footer">
     <div class="footer-content">
       <div class="footer-badge">📶 NOKIA 5130 XPRESSMUSIC ERA</div>
-      
       <h3 class="footer-title">Welcome to the Bluetooth Generation</h3>
-      
       <p class="footer-story">
         Step back into the golden chapter between <strong>2008 and 2013</strong>—an era defined by Nokia XpressMusic sliders, late evening car drives with friends, 2GB MicroSD cards, and transferring 128kbps MP3s over Bluetooth. Whether it was Mohit Chauhan, KK, Atif Aslam, or Pritam's chartbusters, this station is an unadulterated time machine back to those unforgettable years.
       </p>
 
-      <!-- Legal & Contact Box -->
       <div class="disclaimer-box">
         <p><strong>Audio Broadcast Notice:</strong> Audio plays seamlessly through YouTube’s embedded player API. Nothing is hosted on this site, and all rights remain strictly with the respective record labels, composers, and artists. Song metadata is curated from soundtrack listings.</p>
         <p style="margin-top: 8px;">If you hold rights to any content featured here and wish to request removal, kindly email <a href="mailto:damnvr01@gmail.com">damnvr01@gmail.com</a> and it will be taken down immediately.</p>
@@ -789,102 +579,55 @@
 
       <div class="footer-bottom">
         <span>© 2026 Nokia Bluetooth Era Radio</span>
-        <span>•</span>
-        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
-          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          YouTube Stream
-        </a>
       </div>
     </div>
   </footer>
 
-  <!-- Hidden offscreen player container -->
-  <div id="yt-player-container">
-    <div id="player"></div>
-  </div>
-
-  <!-- YouTube Iframe API -->
+  <!-- YOUTUBE IFRAME API -->
   <script src="https://www.youtube.com/iframe_api"></script>
 
   <script>
-    const playlists = [
-      {
-        id: 'PLNQk18YUccs2R8_aqb6EgEDA5e-uACqWm',
-        title: 'Roadtrip Classics',
-        desc: 'Nokia Bluetooth Era (2008–2013)'
-      },
-      {
-        id: 'PL_tHW6DB1saER9hFv3EniaXQw5ZCUBhpn',
-        title: '90s & 2000s Tape Vault',
-        desc: 'Retro Highway & Tapri Hits'
-      },
-      {
-        id: 'PLDISKgcnYRjKkHBsM1vXGzV6bM0qE8tDk',
-        title: 'Late Night Jams',
-        desc: 'Acoustic & Melancholic Hits'
-      }
-    ];
+    // Direct embed-safe 2008-2013 tracks + Playlist fallback
+    const PLAYLIST_ID = 'PLNQk18YUccs2R8_aqb6EgEDA5e-uACqWm';
 
-    let currentPlaylistIndex = 0;
     let player;
     let isPlayerReady = false;
     let isPlaying = false;
     let progressInterval = null;
-    let hasStartedOnce = false;
 
-    // Real-time Local Clock
+    // Clock
     function updateClock() {
       const now = new Date();
-      const options = { hour: 'numeric', minute: '2-digit', hour12: true };
-      document.getElementById('liveClock').textContent = now.toLocaleTimeString([], options);
+      document.getElementById('liveClock').textContent = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Online listener counter simulation
-    let onlineCount = 142;
-    setInterval(() => {
-      onlineCount += Math.floor(Math.random() * 5) - 2;
-      if (onlineCount < 90) onlineCount = 112;
-      document.getElementById('onlineCounter').textContent = onlineCount;
-    }, 4500);
-
-    // Initialize YouTube Player
+    // YouTube API Ready
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
-        height: '200',
-        width: '200',
+        height: '100%',
+        width: '100%',
         playerVars: {
+          'listType': 'playlist',
+          'list': PLAYLIST_ID,
           'playsinline': 1,
           'controls': 0,
-          'enablejsapi': 1
+          'disablekb': 1,
+          'fs': 0,
+          'rel': 0
         },
         events: {
-          'onReady': onPlayerReady,
+          'onReady': () => { isPlayerReady = true; },
           'onStateChange': onPlayerStateChange,
-          'onError': onPlayerError
+          'onError': (e) => {
+            console.warn("Track embedding issue, skipping to next track:", e);
+            if (player && isPlayerReady) player.nextVideo();
+          }
         }
       });
     }
 
-    function onPlayerReady() {
-      isPlayerReady = true;
-      // Pre-cue playlist
-      player.cuePlaylist({
-        list: playlists[currentPlaylistIndex].id,
-        listType: 'playlist',
-        index: 0
-      });
-    }
-
-    function onPlayerError(e) {
-      console.warn("Track cannot be embedded (Error: " + e.data + "). Skipping to next...");
-      if (player && isPlayerReady) {
-        player.nextVideo();
-      }
-    }
-
-    // UI Elements
     const playBtn = document.getElementById('playBtn');
     const dpadPlayBtn = document.getElementById('dpadPlayBtn');
     const playIcon = document.getElementById('playIcon');
@@ -897,79 +640,15 @@
     const currentTimeEl = document.getElementById('currentTime');
     const totalDurationEl = document.getElementById('totalDuration');
 
-    // Drawer Elements
-    const playlistDrawer = document.getElementById('playlistDrawer');
-    const drawerOverlay = document.getElementById('drawerOverlay');
-    const playlistToggleBtn = document.getElementById('playlistToggleBtn');
-    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
-    const playlistItemsContainer = document.getElementById('playlistItems');
-
-    function renderPlaylists() {
-      playlistItemsContainer.innerHTML = '';
-      playlists.forEach((p, idx) => {
-        const item = document.createElement('div');
-        item.className = `playlist-item ${idx === currentPlaylistIndex ? 'active' : ''}`;
-        item.innerHTML = `<h4>${p.title}</h4><p>${p.desc}</p>`;
-        item.addEventListener('click', () => switchPlaylist(idx));
-        playlistItemsContainer.appendChild(item);
-      });
-    }
-    renderPlaylists();
-
-    function switchPlaylist(index) {
-      currentPlaylistIndex = index;
-      renderPlaylists();
-      closeDrawer();
-      if (player && isPlayerReady) {
-        player.loadPlaylist({
-          list: playlists[currentPlaylistIndex].id,
-          listType: 'playlist',
-          index: 0
-        });
-        player.unMute();
-        player.setVolume(100);
-        player.playVideo();
-        hasStartedOnce = true;
-      }
-    }
-
-    function openDrawer() {
-      playlistDrawer.classList.add('open');
-      drawerOverlay.classList.add('open');
-    }
-
-    function closeDrawer() {
-      playlistDrawer.classList.remove('open');
-      drawerOverlay.classList.remove('open');
-    }
-
-    playlistToggleBtn.addEventListener('click', openDrawer);
-    closeDrawerBtn.addEventListener('click', closeDrawer);
-    drawerOverlay.addEventListener('click', closeDrawer);
-
-    function formatTime(seconds) {
-      if (isNaN(seconds) || seconds === null) return "0:00";
-      const min = Math.floor(seconds / 60);
-      const sec = Math.floor(seconds % 60);
-      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    function formatTime(s) {
+      if (isNaN(s) || s === null) return "0:00";
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return `${m}:${sec < 10 ? '0' : ''}${sec}`;
     }
 
     function togglePlay() {
       if (!isPlayerReady || !player) return;
-
-      if (!hasStartedOnce) {
-        // First user interaction: actively load and start playlist
-        player.loadPlaylist({
-          list: playlists[currentPlaylistIndex].id,
-          listType: 'playlist',
-          index: 0
-        });
-        player.unMute();
-        player.setVolume(100);
-        player.playVideo();
-        hasStartedOnce = true;
-        return;
-      }
 
       if (isPlaying) {
         player.pauseVideo();
@@ -986,7 +665,6 @@
         player.unMute();
         player.setVolume(100);
         player.playVideo();
-        hasStartedOnce = true;
       }
     }
 
@@ -996,7 +674,6 @@
         player.unMute();
         player.setVolume(100);
         player.playVideo();
-        hasStartedOnce = true;
       }
     }
 
@@ -1006,8 +683,7 @@
       const duration = player.getDuration() || 0;
 
       if (duration > 0) {
-        const percent = (current / duration) * 100;
-        progressFill.style.width = `${percent}%`;
+        progressFill.style.width = `${(current / duration) * 100}%`;
         currentTimeEl.textContent = formatTime(current);
         totalDurationEl.textContent = formatTime(duration);
       }
@@ -1017,15 +693,11 @@
       if (!player || !isPlayerReady) return;
       const rect = progressBar.getBoundingClientRect();
       const clickX = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-      const width = rect.width;
-      const percentage = Math.max(0, Math.min(1, clickX / width));
-      const duration = player.getDuration();
-
-      if (duration) {
-        const seekTime = duration * percentage;
-        player.seekTo(seekTime, true);
-        progressFill.style.width = `${percentage * 100}%`;
-        currentTimeEl.textContent = formatTime(seekTime);
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      const dur = player.getDuration();
+      if (dur) {
+        player.seekTo(dur * pct, true);
+        progressFill.style.width = `${pct * 100}%`;
       }
     }
 
@@ -1040,18 +712,16 @@
         const videoData = player.getVideoData();
         if (videoData && videoData.title) {
           songTitle.textContent = videoData.title.split('|')[0].trim();
-          artistName.textContent = videoData.author || playlists[currentPlaylistIndex].title;
+          artistName.textContent = videoData.author || "Nokia Bluetooth Era";
         }
 
         clearInterval(progressInterval);
         progressInterval = setInterval(updateProgress, 500);
-      } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+      } else {
         isPlaying = false;
         playBtn.textContent = '▶';
         playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        if (event.data === YT.PlayerState.ENDED) {
-          player.nextVideo();
-        }
+        clearInterval(progressInterval);
       }
     }
 
