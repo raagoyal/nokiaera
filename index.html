@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The B.Tech Batch — Nokia Era 2008-2013 Radio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Rozha+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --neon-orange: #ff5500;
+      --vibrant-yellow: #ffb800;
+      --nokia-cyan: #00d2ff;
+      --glass-bg: rgba(14, 8, 5, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-main: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.72);
+      --card-footer-bg: rgba(18, 11, 7, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0d0705;
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      
+      /* Background Comic Wallpaper */
+      background-image: url('background.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* TOP STATUS BAR */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(10, 6, 4, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.8rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      color: var(--nokia-cyan);
+      font-weight: 700;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: #00ff66;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00ff66;
+      animation: pulse-green 1.6s infinite;
+    }
+
+    @keyframes pulse-green {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--neon-orange);
+      border-color: var(--neon-orange);
+    }
+
+    .nav-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* MAIN HERO VIEWPORT */
+    .hero-section {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 80px 16px 20px;
+    }
+
+    .player-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 430px;
+      margin-bottom: 20px;
+    }
+
+    /* Transparent Glass Deck */
+    .player-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 20px 22px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5),
+                  inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+
+    .station-tag {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .tag-title {
+      font-family: 'Rozha One', serif;
+      font-size: 1.25rem;
+      color: var(--vibrant-yellow);
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .badge-live {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 85, 0, 0.25);
+      border: 1px solid rgba(255, 85, 0, 0.5);
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #ff9d66;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      background: #777;
+      border-radius: 50%;
+    }
+
+    .live-dot.active {
+      background: var(--neon-orange);
+      box-shadow: 0 0 8px var(--neon-orange);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    /* Track Meta */
+    .track-details {
+      margin-bottom: 14px;
+    }
+
+    .track-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    .track-artist {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Seek Bar */
+    .progress-section {
+      margin-bottom: 16px;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.22);
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, var(--vibrant-yellow), var(--neon-orange));
+      border-radius: 6px;
+      box-shadow: 0 0 12px rgba(255, 85, 0, 0.7);
+      transition: width 0.15s linear;
+    }
+
+    .time-stamps {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 5px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-action svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .btn-main-play {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--vibrant-yellow), var(--neon-orange));
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(255, 85, 0, 0.55);
+      transition: all 0.2s ease;
+    }
+
+    .btn-main-play:active {
+      transform: scale(0.92);
+      box-shadow: 0 3px 10px rgba(255, 85, 0, 0.4);
+    }
+
+    .btn-main-play svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* Scroll Down Indicator */
+    .scroll-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      animation: float 2s infinite ease-in-out;
+      margin-top: 10px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* SLIDE-OUT PLAYLIST DRAWER */
+    .playlist-drawer {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100%;
+      background: rgba(18, 10, 6, 0.95);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-left: 1px solid var(--glass-border);
+      z-index: 200;
+      padding: 24px 20px;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .playlist-drawer.open {
+      right: 0;
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .drawer-header h3 {
+      font-family: 'Rozha One', serif;
+      color: var(--vibrant-yellow);
+      font-size: 1.3rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .playlist-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+
+    .playlist-item {
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .playlist-item:hover, .playlist-item.active {
+      background: rgba(255, 85, 0, 0.25);
+      border-color: var(--neon-orange);
+    }
+
+    .playlist-item h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .playlist-item p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* NOSTALGIC FOOTER SECTION */
+    .footer-section {
+      width: 100%;
+      background: var(--card-footer-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 60px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-content {
+      max-width: 620px;
+    }
+
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      color: var(--nokia-cyan);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .footer-title {
+      font-family: 'Rozha One', serif;
+      font-size: 1.8rem;
+      color: var(--vibrant-yellow);
+      margin-bottom: 16px;
+    }
+
+    .footer-story {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 30px;
+    }
+
+    .disclaimer-box {
+      background: rgba(0,0,0,0.4);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 18px 20px;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .disclaimer-box a {
+      color: var(--neon-orange);
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      width: 100%;
+    }
+
+    .footer-icon-link {
+      color: #ff3333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer-icon-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Offscreen hidden player */
+    #yt-player-container {
+      position: fixed;
+      left: -9999px;
+      bottom: 0;
+      width: 200px;
+      height: 200px;
+      pointer-events: none;
+    }
+
+    @media (min-width: 600px) {
+      .hero-section {
+        justify-content: center;
+      }
+      .player-card {
+        padding: 24px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP STATUS BAR -->
+  <nav class="top-nav">
+    <div class="nav-left" id="liveClock">--:-- --</div>
+    <div class="nav-center">
+      <span class="pulse-dot"></span>
+      <span id="onlineCounter">142</span> online
+    </div>
+    <div class="nav-right">
+      <!-- YouTube Icon Top -->
+      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="nav-btn" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <!-- Playlist Menu Button -->
+      <button class="nav-btn" id="playlistToggleBtn">
+        ☰ Playlists
+      </button>
+    </div>
+  </nav>
+
+  <!-- PLAYLIST SLIDE-OUT DRAWER -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="playlist-drawer" id="playlistDrawer">
+    <div class="drawer-header">
+      <h3>Tape Vault</h3>
+      <button class="close-btn" id="closeDrawerBtn">×</button>
+    </div>
+    <div class="playlist-list" id="playlistItems">
+      <!-- Injected via JavaScript -->
+    </div>
+  </aside>
+
+  <!-- MAIN HERO / CASSETTE PLAYER -->
+  <main class="hero-section">
+    <div class="player-wrapper">
+      <div class="player-card">
+        
+        <!-- Header -->
+        <div class="station-tag">
+          <span class="tag-title">The B.Tech Batch</span>
+          <div class="badge-live">
+            <span class="live-dot" id="liveDot"></span>
+            <span>20's FM</span>
+          </div>
+        </div>
+
+        <!-- Track Info -->
+        <div class="track-details">
+          <div class="track-title" id="songTitle">Tap Play to Start</div>
+          <div class="track-artist" id="artistName">Nokia Bluetooth Era (2008–2013)</div>
+        </div>
+
+        <!-- Progress Seek Bar -->
+        <div class="progress-section">
+          <div class="progress-bar-container" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="time-stamps">
+            <span id="currentTime">0:00</span>
+            <span id="totalDuration">0:00</span>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+          <button class="btn-action" id="prevBtn" aria-label="Previous">
+            <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+          </button>
+
+          <button class="btn-main-play" id="playBtn" aria-label="Play or Pause">
+            <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+
+          <button class="btn-action" id="nextBtn" aria-label="Next">
+            <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <a href="#footer" class="scroll-hint">
+      <span>Scroll Down for Story</span>
+      <span>↓</span>
+    </a>
+  </main>
+
+  <!-- NOSTALGIC FOOTER SECTION -->
+  <footer class="footer-section" id="footer">
+    <div class="footer-content">
+      <div class="footer-badge">📶 NOKIA 5130 XPRESSMUSIC ERA</div>
+      
+      <h3 class="footer-title">Welcome to the Bluetooth Generation</h3>
+      
+      <p class="footer-story">
+        Step back into the golden chapter between <strong>2008 and 2013</strong>—an era defined by Nokia XpressMusic sliders, crammed car road trips to college, 2GB MicroSD cards, and transferring 128kbps MP3s over Bluetooth on the hostel back benches. Whether it was Mohit Chauhan, KK, Atif Aslam, or Pritam's chartbusters, this station is an unadulterated time machine back to our B.Tech days.
+      </p>
+
+      <!-- Legal & Contact Box -->
+      <div class="disclaimer-box">
+        <p><strong>Audio Broadcast Notice:</strong> Audio plays seamlessly through YouTube’s embedded player API. Nothing is hosted on this site, and all rights remain strictly with the respective record labels, composers, and artists. Song metadata is curated from soundtrack listings.</p>
+        <p style="margin-top: 8px;">If you hold rights to any content featured here and wish to request removal, kindly email <a href="mailto:damnvr01@gmail.com">damnvr01@gmail.com</a> and it will be taken down immediately.</p>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 The B.Tech Batch</span>
+        <span>•</span>
+        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube Stream
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Hidden YouTube Player Container -->
+  <div id="yt-player-container">
+    <div id="player"></div>
+  </div>
+
+  <!-- YouTube Iframe API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    // Configurable Playlists
+    const playlists = [
+      {
+        id: 'PL_tHW6DB1saER9hFv3EniaXQw5ZCUBhpn',
+        title: 'B.Tech Roadtrip Classics',
+        desc: 'Nokia Bluetooth Era (2008–2013)'
+      },
+      {
+        id: 'PLDISKgcnYRjKkHBsM1vXGzV6bM0qE8tDk', // Replace with your other YouTube Playlist ID
+        title: 'Late Night Hostel Jams',
+        desc: 'Acoustic & Melancholic Hits'
+      },
+      {
+        id: 'PL4fGSI1pDJn6jXS_PEO49pk573I5739', // Replace with your other YouTube Playlist ID
+        title: 'College Canteen Rock',
+        desc: 'High-energy Anthems & Pop'
+      }
+    ];
+
+    let currentPlaylistIndex = 0;
+    let player;
+    let isPlayerReady = false;
+    let isPlaying = false;
+    let progressInterval = null;
+
+    // Real-time Local Clock
+    function updateClock() {
+      const now = new Date();
+      const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+      document.getElementById('liveClock').textContent = now.toLocaleTimeString([], options);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Fluctuate Online Listeners slightly for realism
+    let onlineCount = 142;
+    setInterval(() => {
+      onlineCount += Math.floor(Math.random() * 5) - 2;
+      if (onlineCount < 90) onlineCount = 112;
+      document.getElementById('onlineCounter').textContent = onlineCount;
+    }, 4500);
+
+    // Initialize YouTube Player
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '200',
+        width: '200',
+        playerVars: {
+          'listType': 'playlist',
+          'list': playlists[currentPlaylistIndex].id,
+          'playsinline': 1,
+          'controls': 0,
+          'origin': window.location.origin,
+          'enablejsapi': 1
+        },
+        events: {
+          'onReady': () => { isPlayerReady = true; },
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    // UI Elements
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const songTitle = document.getElementById('songTitle');
+    const artistName = document.getElementById('artistName');
+    const liveDot = document.getElementById('liveDot');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalDurationEl = document.getElementById('totalDuration');
+
+    // Drawer Elements
+    const playlistDrawer = document.getElementById('playlistDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const playlistToggleBtn = document.getElementById('playlistToggleBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const playlistItemsContainer = document.getElementById('playlistItems');
+
+    // Render Playlists in Drawer
+    function renderPlaylists() {
+      playlistItemsContainer.innerHTML = '';
+      playlists.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = `playlist-item ${idx === currentPlaylistIndex ? 'active' : ''}`;
+        item.innerHTML = `<h4>${p.title}</h4><p>${p.desc}</p>`;
+        item.addEventListener('click', () => switchPlaylist(idx));
+        playlistItemsContainer.appendChild(item);
+      });
+    }
+    renderPlaylists();
+
+    function switchPlaylist(index) {
+      currentPlaylistIndex = index;
+      renderPlaylists();
+      closeDrawer();
+      if (player && isPlayerReady) {
+        player.loadPlaylist({
+          list: playlists[currentPlaylistIndex].id,
+          listType: 'playlist'
+        });
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+      }
+    }
+
+    function openDrawer() {
+      playlistDrawer.classList.add('open');
+      drawerOverlay.classList.add('open');
+    }
+
+    function closeDrawer() {
+      playlistDrawer.classList.remove('open');
+      drawerOverlay.classList.remove('open');
+    }
+
+    playlistToggleBtn.addEventListener('click', openDrawer);
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+
+    // Format Seconds to MM:SS
+    function formatTime(seconds) {
+      if (isNaN(seconds) || seconds === null) return "0:00";
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    // Toggle Play/Pause
+    function togglePlay() {
+      if (!isPlayerReady || !player) return;
+
+      if (isPlaying) {
+        player.pauseVideo();
+      } else {
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+      }
+    }
+
+    function nextTrack() {
+      if (player && isPlayerReady) {
+        player.nextVideo();
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+      }
+    }
+
+    function prevTrack() {
+      if (player && isPlayerReady) {
+        player.previousVideo();
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+      }
+    }
+
+    // Update Progress & Timestamps
+    function updateProgress() {
+      if (!player || !isPlaying) return;
+      const current = player.getCurrentTime() || 0;
+      const duration = player.getDuration() || 0;
+
+      if (duration > 0) {
+        const percent = (current / duration) * 100;
+        progressFill.style.width = `${percent}%`;
+        currentTimeEl.textContent = formatTime(current);
+        totalDurationEl.textContent = formatTime(duration);
+      }
+    }
+
+    // Seek in Track
+    function seek(e) {
+      if (!player || !isPlayerReady) return;
+      const rect = progressBar.getBoundingClientRect();
+      const clickX = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+      const width = rect.width;
+      const percentage = Math.max(0, Math.min(1, clickX / width));
+      const duration = player.getDuration();
+
+      if (duration) {
+        const seekTime = duration * percentage;
+        player.seekTo(seekTime, true);
+        progressFill.style.width = `${percentage * 100}%`;
+        currentTimeEl.textContent = formatTime(seekTime);
+      }
+    }
+
+    progressBar.addEventListener('click', seek);
+
+    // Player State Change Handler
+    function onPlayerStateChange(event) {
+      if (event.data === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Pause SVG
+        liveDot.classList.add('active');
+
+        // Dynamic Title
+        const videoData = player.getVideoData();
+        if (videoData && videoData.title) {
+          songTitle.textContent = videoData.title.split('|')[0].trim();
+          artistName.textContent = videoData.author || playlists[currentPlaylistIndex].title;
+        }
+
+        clearInterval(progressInterval);
+        progressInterval = setInterval(updateProgress, 500);
+      } else {
+        isPlaying = false;
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; // Play SVG
+        liveDot.classList.remove('active');
+        clearInterval(progressInterval);
+      }
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+    nextBtn.addEventListener('click', nextTrack);
+    prevBtn.addEventListener('click', prevTrack);
+  </script>
+</body>
+</html>
