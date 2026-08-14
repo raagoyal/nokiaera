@@ -28,16 +28,21 @@
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 90px; /* Space for bottom docked player */
-      overflow-x: hidden;
-    }
+  /* Set image path */
+  background-image: url('background.png');
+
+  /* Scale to cover the entire viewport */
+  background-size: cover;
+
+  /* Keep it centered */
+  background-position: center center;
+
+  /* Prevent tiling/repeating */
+  background-repeat: no-repeat;
+
+  /* Keep background fixed while scrolling */
+  background-attachment: fixed;
+}
 
     /* TOP HEADER BAR */
     .site-header {
