@@ -13,7 +13,7 @@
       --neon-orange: #ff5500;
       --vibrant-yellow: #ffb800;
       --nokia-cyan: #00d2ff;
-      --glass-bg: rgba(14, 8, 5, 0.42);
+      --glass-bg: rgba(14, 8, 5, 0.65);
       --glass-border: rgba(255, 255, 255, 0.2);
       --text-main: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.72);
@@ -42,7 +42,7 @@
       align-items: center;
       overflow-x: hidden;
       
-      /* Comic Wallpaper */
+      /* Background Comic Wallpaper */
       background-image: url('background.png');
       background-size: cover;
       background-position: center top;
@@ -59,7 +59,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 12px 18px;
-      background: rgba(10, 6, 4, 0.65);
+      background: rgba(10, 6, 4, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -150,12 +150,12 @@
     /* Minimal Floating Glass Card */
     .player-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(14px) saturate(180%);
-      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
       padding: 20px 22px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5),
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6),
                   inset 0 1px 1px rgba(255, 255, 255, 0.25);
     }
 
@@ -207,9 +207,26 @@
       50% { transform: scale(1.3); opacity: 0.6; }
     }
 
+    /* Embedded YouTube Frame */
+    .video-container {
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .video-container iframe, .video-container #player {
+      width: 100%;
+      height: 100%;
+    }
+
     /* Track Meta */
     .track-details {
       margin-bottom: 14px;
+      text-align: center;
     }
 
     .track-title {
@@ -230,7 +247,6 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
     }
 
     /* Seek Bar */
@@ -276,7 +292,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 8px;
+      padding: 0 12px;
     }
 
     .btn-action {
@@ -342,13 +358,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       text-decoration: none;
-      animation: float 2s infinite ease-in-out;
       margin-top: 10px;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
     }
 
     /* FOOTER */
@@ -435,18 +445,6 @@
       fill: currentColor;
     }
 
-    /* Active on-screen player container (avoids invisible element suspension) */
-    .yt-mount-point {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      opacity: 0.01;
-      pointer-events: none;
-      z-index: 0;
-    }
-
     @media (min-width: 600px) {
       .hero-section { justify-content: center; }
       .player-card { padding: 24px 28px; }
@@ -469,7 +467,7 @@
     </div>
   </nav>
 
-  <!-- MAIN HERO / CASSETTE PLAYER -->
+  <!-- MAIN HERO / PLAYER -->
   <main class="hero-section">
     <div class="player-wrapper">
       <div class="player-card">
@@ -481,6 +479,11 @@
             <span class="live-dot" id="liveDot"></span>
             <span>LIVE</span>
           </div>
+        </div>
+
+        <!-- Embedded YouTube Video Screen -->
+        <div class="video-container">
+          <div id="player"></div>
         </div>
 
         <!-- Track Info -->
@@ -536,7 +539,6 @@
         Step back into the golden chapter between <strong>2008 and 2013</strong>—an era defined by Nokia XpressMusic sliders, late evening car drives with friends, 2GB MicroSD cards, and transferring 128kbps MP3s over Bluetooth. Whether it was Mohit Chauhan, KK, Atif Aslam, or Pritam's chartbusters, this station is an unadulterated time machine back to those unforgettable years.
       </p>
 
-      <!-- Legal & Contact Box -->
       <div class="disclaimer-box">
         <p><strong>Audio Broadcast Notice:</strong> Audio plays seamlessly through YouTube’s embedded player API. Nothing is hosted on this site, and all rights remain strictly with the respective record labels, composers, and artists. Song metadata is curated from soundtrack listings.</p>
         <p style="margin-top: 8px;">If you hold rights to any content featured here and wish to request removal, kindly email <a href="mailto:damnvr01@gmail.com">damnvr01@gmail.com</a> and it will be taken down immediately.</p>
@@ -552,11 +554,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- YouTube Mount Point -->
-  <div class="yt-mount-point">
-    <div id="player"></div>
-  </div>
 
   <!-- YouTube Iframe API -->
   <script src="https://www.youtube.com/iframe_api"></script>
@@ -579,7 +576,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Online listeners counter simulation
+    // Online counter simulation
     let onlineCount = 142;
     setInterval(() => {
       onlineCount += Math.floor(Math.random() * 5) - 2;
@@ -590,13 +587,11 @@
     // Initialize YouTube Player
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
-        height: '10',
-        width: '10',
         playerVars: {
           'listType': 'playlist',
           'list': PLAYLIST_ID,
           'playsinline': 1,
-          'controls': 0
+          'controls': 1
         },
         events: {
           'onReady': () => { isPlayerReady = true; },
@@ -608,7 +603,6 @@
       });
     }
 
-    // UI Elements
     const playBtn = document.getElementById('playBtn');
     const playIcon = document.getElementById('playIcon');
     const prevBtn = document.getElementById('prevBtn');
