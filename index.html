@@ -798,7 +798,7 @@
     </div>
   </footer>
 
-  <!-- Hidden YouTube Player Container -->
+  <!-- Hidden offscreen player container -->
   <div id="yt-player-container">
     <div id="player"></div>
   </div>
@@ -809,7 +809,7 @@
   <script>
     const playlists = [
       {
-        id: 'PLNQk18YUccs2R8_aqb6EgEDA5e-uACqWm&index=1',
+        id: 'PLNQk18YUccs2R8_aqb6EgEDA5e-uACqWm',
         title: 'Roadtrip Classics',
         desc: 'Nokia Bluetooth Era (2008–2013)'
       },
@@ -830,6 +830,7 @@
     let isPlayerReady = false;
     let isPlaying = false;
     let progressInterval = null;
+    let hasStartedOnce = false;
 
     // Real-time Local Clock
     function updateClock() {
@@ -840,7 +841,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Online counter simulation
+    // Online listener counter simulation
     let onlineCount = 142;
     setInterval(() => {
       onlineCount += Math.floor(Math.random() * 5) - 2;
@@ -854,18 +855,33 @@
         height: '200',
         width: '200',
         playerVars: {
-          'listType': 'playlist',
-          'list': playlists[currentPlaylistIndex].id,
           'playsinline': 1,
           'controls': 0,
-          'origin': window.location.origin,
           'enablejsapi': 1
         },
         events: {
-          'onReady': () => { isPlayerReady = true; },
-          'onStateChange': onPlayerStateChange
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange,
+          'onError': onPlayerError
         }
       });
+    }
+
+    function onPlayerReady() {
+      isPlayerReady = true;
+      // Pre-cue playlist
+      player.cuePlaylist({
+        list: playlists[currentPlaylistIndex].id,
+        listType: 'playlist',
+        index: 0
+      });
+    }
+
+    function onPlayerError(e) {
+      console.warn("Track cannot be embedded (Error: " + e.data + "). Skipping to next...");
+      if (player && isPlayerReady) {
+        player.nextVideo();
+      }
     }
 
     // UI Elements
@@ -907,11 +923,13 @@
       if (player && isPlayerReady) {
         player.loadPlaylist({
           list: playlists[currentPlaylistIndex].id,
-          listType: 'playlist'
+          listType: 'playlist',
+          index: 0
         });
         player.unMute();
         player.setVolume(100);
         player.playVideo();
+        hasStartedOnce = true;
       }
     }
 
@@ -939,6 +957,20 @@
     function togglePlay() {
       if (!isPlayerReady || !player) return;
 
+      if (!hasStartedOnce) {
+        // First user interaction: actively load and start playlist
+        player.loadPlaylist({
+          list: playlists[currentPlaylistIndex].id,
+          listType: 'playlist',
+          index: 0
+        });
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+        hasStartedOnce = true;
+        return;
+      }
+
       if (isPlaying) {
         player.pauseVideo();
       } else {
@@ -954,6 +986,7 @@
         player.unMute();
         player.setVolume(100);
         player.playVideo();
+        hasStartedOnce = true;
       }
     }
 
@@ -963,6 +996,7 @@
         player.unMute();
         player.setVolume(100);
         player.playVideo();
+        hasStartedOnce = true;
       }
     }
 
@@ -1011,11 +1045,13 @@
 
         clearInterval(progressInterval);
         progressInterval = setInterval(updateProgress, 500);
-      } else {
+      } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
         isPlaying = false;
         playBtn.textContent = '▶';
         playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        clearInterval(progressInterval);
+        if (event.data === YT.PlayerState.ENDED) {
+          player.nextVideo();
+        }
       }
     }
 
